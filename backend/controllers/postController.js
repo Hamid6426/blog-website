@@ -54,3 +54,24 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.uploadPostImage = async (req, res) => {
+  try {
+    await imageService.savePostImage(req.params.postId, req.file.path);
+    res.send('Post image saved successfully!');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error saving post image');
+  }
+};
+
+exports.getPostImage = async (req, res) => {
+  try {
+    const image = await imageService.getPostImage(req.params.postId);
+    res.contentType('image/jpeg'); // Adjust based on the image type
+    res.send(image);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error retrieving post image');
+  }
+};

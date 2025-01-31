@@ -20,6 +20,6 @@ exports.deleteCategory = async (id) => {
   return await Category.findByIdAndDelete(id);
 };
 
-exports.patchCategory = async (id, postData) => {
-  return await Post.findByIdAndUpdate(id, { $set: postData }, { new: true });
+exports.patchCategory = async (id, categoryData) => {
+  return await Category.findByIdAndUpdate(id, { $set: categoryData }, { new: true });
 };

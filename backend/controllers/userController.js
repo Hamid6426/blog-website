@@ -19,10 +19,19 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-exports.createUser = async (req, res) => {
+exports.registerUser = async (req, res) => {
   try {
-    const user = await userService.createUser(req.body);
+    const user = await userService.registerUser(req.body);
     res.status(201).json(user);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+exports.loginUser = async (req, res) => {
+  try {
+    const user = await userService.loginUser(req.body.email, req.body.password);
+    res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
